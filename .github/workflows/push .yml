@@ -9,21 +9,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         name: Check out code
-
-      - uses: mr-smithers-excellent/docker-build-push@v5
-        name: Build and push angular image
-        with:
-          image: safidesafi/scrumboard
-          tags: angular
-          registry: docker.io
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-            -
       - uses: mr-smithers-excellent/docker-build-push@v5
         name: Build and push keycloak image
         with:
-          image: safidesafi/scrumboard
-          tags: keycloak
+          image: scrumboard/keycloak
+          tags: latest
           registry: docker.io
           directory: ./keycloak
           username: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -32,12 +22,9 @@ jobs:
       - uses: mr-smithers-excellent/docker-build-push@v5
         name: Build and push nodejs_backend image
         with:
-          image: safidesafi/scrumboard
-          tags: nodejs
+          image: scrumboard/nodejs
+          tags: latest
           registry: docker.io
           directory: ./nodejs_backend
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
-          
-
