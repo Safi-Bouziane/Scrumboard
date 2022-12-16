@@ -1,9 +1,11 @@
 name: Contrast Security SCA
 
 on:
-  pull_request:
-    branches:
-      - "main"
+  # Scan changed files in PRs (diff-aware scanning):
+  pull_request: {}
+  # Scan mainline branches and report all findings:
+  push:
+    branches: ["master", "main"]
 
 jobs:
   Check-Dependency-Vulnerabilities:
