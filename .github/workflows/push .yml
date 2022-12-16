@@ -19,7 +19,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          context: ../
+          context: .
           tags: angular:latest
       -
         name: Build and push keycloack image
