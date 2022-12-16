@@ -15,7 +15,7 @@ jobs:
         with:
           image: safidesafi/angular
           tags: latest
-          registry: registry-url.io
+          registry: hub.docker.com/r/safidesafi/scrumboard
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
