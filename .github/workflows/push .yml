@@ -13,9 +13,31 @@ jobs:
       - uses: mr-smithers-excellent/docker-build-push@v5
         name: Build and push angular image
         with:
-          image: scrumboard/angular
-          tags: latest
+          image: safidesafi/scrumboard
+          tags: angular
           registry: docker.io
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+            -
+      - uses: mr-smithers-excellent/docker-build-push@v5
+        name: Build and push keycloak image
+        with:
+          image: safidesafi/scrumboard
+          tags: keycloak
+          registry: docker.io
+          directory: ./keycloak
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+            -
+      - uses: mr-smithers-excellent/docker-build-push@v5
+        name: Build and push nodejs_backend image
+        with:
+          image: safidesafi/scrumboard
+          tags: nodejs
+          registry: docker.io
+          directory: ./nodejs_backend
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+          
 
