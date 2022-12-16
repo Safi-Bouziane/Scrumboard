@@ -26,5 +26,12 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          context: ./
+          context: ./keycloak
           tags: keycloak:latest
+      -
+        name: Build and push nodejsbackend image
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          context: ./nodejs_backend
+          tags: nodjesbackend:latest
