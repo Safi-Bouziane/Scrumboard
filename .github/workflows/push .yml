@@ -1,0 +1,30 @@
+name: push images to dockerhub
+
+on:
+  push:
+    branches:
+      - 'main'
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push angular image
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          context: ./
+          tags: angular:latest
+      -
+        name: Build and push keycloack image
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          context: ./
+          tags: keycloak:latest
