@@ -1,18 +1,26 @@
-name: Example workflow for Python using Snyk
-on: push
+name: Contrast Security SCA
+
+on:
+  # Scan changed files in PRs (diff-aware scanning):
+  pull_request: {}
+  # Scan mainline branches and report all findings:
+  push:
+    branches: ["master", "main"]
+
 jobs:
-  security:
+  Check-Dependency-Vulnerabilities:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/node@master
-        continue-on-error: true # To make sure that SARIF upload gets called
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        # Checkout/build your application/install Node
+      - uses: actions/checkout@v3
+
+      - name: Contrast SCA Action
+        uses: Contrast-Security-OSS/contrast-sca-action@v1
         with:
-          args: --sarif-file-output=snyk.sarif --all-projects
-      - name: Upload result to GitHub Code Scanning
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: snyk.sarif
+          apiKey: ${{ secrets.CONTRAST_API_KEY }}
+          orgId: ${{ secrets.CONTRAST_ORGANIZATION_ID }}
+          authHeader: ${{ secrets.CONTRAST_AUTH_HEADER }}
+          apiUrl: ${{ secrets.CONTRAST_API_URL }}
+          filePath: package.json
+          severity: medium
+          fail: true
