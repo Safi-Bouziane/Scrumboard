@@ -1,42 +1,46 @@
-name: push images to dockerhub
+name: ci
+
 on:
   push:
-    branches:
-      - 'master'
+
 jobs:
-  docker:
+  scan:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        name: Check out code
-        
-      - uses: mr-smithers-excellent/docker-build-push@v5
-        name: Build and push angular image
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Build
+        uses: docker/build-push-action@v3
         with:
-          image: scrumboard/angular
-          tags: latest
-          registry: docker.io
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          
-            -
-      - uses: mr-smithers-excellent/docker-build-push@v5
-        name: Build and push keycloak image
+          context: .
+          push: true
+          tags: user/app:latest
+      -
+        name: Scan for vulnerabilities
+        id: scan_angular
+        uses: crazy-max/ghaction-container-scan@v2
         with:
-          image: scrumboard/keycloak
-          tags: latest
-          registry: docker.io
-          directory: ./keycloak
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          
-            -
-      - uses: mr-smithers-excellent/docker-build-push@v5
-        name: Build and push nodejs_backend image
+          image: user/app:latest
+          dockerfile: ./Dockerfile
+      -
+        name: Build
+        uses: docker/build-push-action@v3
         with:
-          image: scrumboard/nodejs
-          tags: latest
-          registry: docker.io
-          directory: ./nodejs_backend
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          context: ./keycloak
+          push: true
+          tags: user/app:latest
+      -
+        name: Scan for vulnerabilities
+        id: scan_keycloack
+        uses: crazy-max/ghaction-container-scan@v2
+        with:
+          image: user/app:latest
+          dockerfile: ./Dockerfile
+      -
+        name: Upload SARIF file
+        if: ${{ steps.scan.outputs.sarif != '' }}
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: ${{ steps.scan.outputs.sarif }}
