@@ -34,3 +34,15 @@ jobs:
         image: safidesafi/scrumboard:angular
         artifact-name: angular.spdx.json
         dependency-snapshot: true
+    - name: Scan the image and upload dependency results
+      uses: anchore/sbom-action@bb716408e75840bbb01e839347cd213767269d4a
+      with:
+        image: safidesafi/scrumboard:keycloak
+        artifact-name: keycloak.spdx.json
+        dependency-snapshot: true
+    - name: Scan the image and upload dependency results
+      uses: anchore/sbom-action@bb716408e75840bbb01e839347cd213767269d4a
+      with:
+        image: safidesafi/scrumboard:nodejs_backend
+        artifact-name: nodejs_backend.spdx.json
+        dependency-snapshot: true
