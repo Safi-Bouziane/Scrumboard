@@ -1,4 +1,4 @@
-name: ci
+name: Push and scan dockerhub containers
 
 on:
   push:
