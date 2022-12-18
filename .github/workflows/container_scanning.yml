@@ -26,6 +26,7 @@ jobs:
         uses: crazy-max/ghaction-container-scan@v2
         with:
           image: safidesafi/scrumboard:angular
+          severity_threshold: HIGH
           dockerfile: ./Dockerfile
             -
       - name: Build and push keycloak
@@ -40,6 +41,7 @@ jobs:
         uses: crazy-max/ghaction-container-scan@v2
         with:
           image: safidesafi/scrumboard:keycloak
+          severity_threshold: HIGH    
           dockerfile: ./Dockerfile
                       -
       - name: Build and push nodejsbackend
@@ -54,6 +56,7 @@ jobs:
         uses: crazy-max/ghaction-container-scan@v2
         with:
           image: safidesafi/scrumboard:nodejs_backend
+          severity_threshold: HIGH
           dockerfile: ./Dockerfile
       -
         name: Upload SARIF file
