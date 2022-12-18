@@ -39,7 +39,21 @@ jobs:
         id: scan_keycloak
         uses: crazy-max/ghaction-container-scan@v2
         with:
-          image: safidesafi/scrumboard:kecloak
+          image: safidesafi/scrumboard:keycloak
+          dockerfile: ./Dockerfile
+                      -
+      - name: Build and push nodejsbackend
+        uses: docker/build-push-action@v2
+        with:
+          context: ./nodejs_backend
+          push: true
+          tags: safidesafi/scrumboard:nodejs_backend
+      -
+        name: Scan for vulnerabilities
+        id: scan_nodejs_backend
+        uses: crazy-max/ghaction-container-scan@v2
+        with:
+          image: safidesafi/scrumboard:nodejs_backend
           dockerfile: ./Dockerfile
       -
         name: Upload SARIF file
