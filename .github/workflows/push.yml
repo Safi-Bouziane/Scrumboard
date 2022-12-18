@@ -15,8 +15,8 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-    
-      - name: Build and push
+            -
+      - name: Build and push angular
         uses: docker/build-push-action@v2
         with:
           push: true
@@ -26,21 +26,21 @@ jobs:
         id: scan_angular
         uses: crazy-max/ghaction-container-scan@v2
         with:
-          image: user/app:latest
+          image: safidesafi/scrumboard:angular
           dockerfile: ./Dockerfile
-      -
-        name: Build
-        uses: docker/build-push-action@v3
+            -
+      - name: Build and push keycloak
+        uses: docker/build-push-action@v2
         with:
           context: ./keycloak
           push: true
-          tags: user/app:latest
+          tags: safidesafi/scrumboard:keycloak
       -
         name: Scan for vulnerabilities
-        id: scan_keycloack
+        id: scan_keycloak
         uses: crazy-max/ghaction-container-scan@v2
         with:
-          image: user/app:latest
+          image: safidesafi/scrumboard:kecloak
           dockerfile: ./Dockerfile
       -
         name: Upload SARIF file
