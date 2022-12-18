@@ -10,13 +10,18 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v3
-      -
-        name: Build
-        uses: docker/build-push-action@v3
+          -
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
         with:
-          context: .
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+    
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
           push: true
-          tags: user/app:latest
+          tags: safidesafi/scrumboard:angular
       -
         name: Scan for vulnerabilities
         id: scan_angular
