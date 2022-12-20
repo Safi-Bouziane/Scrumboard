@@ -17,8 +17,8 @@ services:
         - './Scrumboard:/src/usr/app' 
       ports:
         - 4200:4200
-      command: > 
-        bash -c "npm install && ng serve --host 0.0.0.0"
+      command: 
+          npm start
    nodejs-service:
       container_name: nodecontainer
       build: ./nodejs_backend
