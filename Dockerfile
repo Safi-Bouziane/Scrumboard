@@ -1,4 +1,4 @@
-FROM node:19.1.0-buster-slim
+FROM lts-bullseye-slim
 
 RUN mkdir /usr/src/app 
 WORKDIR /usr/src/app
