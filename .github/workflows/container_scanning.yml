@@ -25,7 +25,6 @@ jobs:
         id: scan_angular
         uses: crazy-max/ghaction-container-scan@v2
         with:
-          severity_threshold: HIGH
           image: safidesafi/scrumboard:angular
           dockerfile: ./Dockerfile
             -
@@ -40,7 +39,6 @@ jobs:
         id: scan_keycloak
         uses: crazy-max/ghaction-container-scan@v2
         with:
-          severity_threshold: HIGH
           image: safidesafi/scrumboard:keycloak
           dockerfile: ./Dockerfile
                       -
@@ -55,7 +53,6 @@ jobs:
         id: scan_nodejs_backend
         uses: crazy-max/ghaction-container-scan@v2
         with:
-          severity_threshold: HIGH
           image: safidesafi/scrumboard:nodejs_backend
           dockerfile: ./Dockerfile
       -
