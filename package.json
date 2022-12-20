@@ -20,7 +20,7 @@
     "@angular/router": "^14.2.9",
     "axios": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
-    "keycloak-angular": "^12.1.0",
+    "keycloak-angular": "^12.2.0",
     "keycloak-js": "^19.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.4.1",
