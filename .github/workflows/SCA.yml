@@ -1,4 +1,4 @@
-name: Contrast Security SCA
+name: FOSSA SCA
 
 on:
   # Scan changed files in PRs (diff-aware scanning):
