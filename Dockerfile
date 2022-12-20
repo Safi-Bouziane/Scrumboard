@@ -1,4 +1,4 @@
-FROM lts-bullseye-slim
+FROM node:lts-bullseye-slim
 
 RUN mkdir /usr/src/app 
 WORKDIR /usr/src/app
