@@ -1,6 +1,6 @@
 var fs = require('fs');
 path = require('path'),    
-filePath = path.join(__dirname, "/scrumboard.json"); 
+filePath = path.join(__dirname, "./scrumboard.json"); 
 
 // json file with the data
 var data = fs.readFileSync(filePath);
@@ -38,7 +38,7 @@ app.get('/', function(req, res)  {
   });
 app.get('/storypoints', function(req, res) {res.send(storypoints)});
 app.get('/storyboards', function(req, res) {res.send(storyboards)});
-app.post('/storyboard', function(req, res) { const { title, estimation, priority} = req.body
+app.post('/storyboards', function(req, res) { const { title, estimation, priority} = req.body
 let storyboard = {
     "id":storyboards.Lenght + 1, 
     "title":title,
@@ -50,7 +50,7 @@ storyboards.push(storyboard)
 jsonData['storyboard'] = storyboards 
 let data = JSON.stringify(jsonData, null, 2);
 
-fs.writeFile('./nodejs_backend/scrumboard.json', data, (err) => {
+fs.writeFile('./scrumboard.json', data, (err) => {
     if (err) throw err;
     console.log('Data written to file');
 });});

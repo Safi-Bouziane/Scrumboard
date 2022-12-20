@@ -1,7 +1,7 @@
 version: '3.5' 
 services: 
    keycloak:
-      container_name: keycloackcontainer
+      container_name: keycloakcontainer
       build: ./keycloak
       ports:
         - 8080:8080

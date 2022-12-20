@@ -13,10 +13,10 @@ export class ScrumboardService {
   }
 
   get Stories() {
-    return this._http.get<Story[]>('http://localhost:3000/storyboard').toPromise()
+    return this._http.get<Story[]>('http://localhost:3000/storyboards').toPromise()
   }
   async  Post(title:string,estimation:number,priority:boolean) {
-    return this._http.post('http://localhost:3000/storyboard',{
+    return this._http.post('http://localhost:3000/storyboards',{
       "title":title,
       "estimation":estimation,
       "state":0,
@@ -25,11 +25,11 @@ export class ScrumboardService {
   }
 
   async Delete(id:number){
-    return this._http.delete(`http://localhost:3000/storyboard/${id}`).toPromise();
+    return this._http.delete(`http://localhost:3000/storyboards/${id}`).toPromise();
   }
 
   async Update(id:number, story: Story){
-    return this._http.put(`http://localhost:3000/storyboard/${id}`,story).toPromise();
+    return this._http.put(`http://localhost:3000/storyboards/${id}`,story).toPromise();
   }
 }
 
