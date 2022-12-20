@@ -6,21 +6,20 @@ on:
   # Scan mainline branches and report all findings:
   push:
     branches: ["master", "main"]
-
 jobs:
-  Check-Dependency-Vulnerabilities:
+  fossa-scan:
     runs-on: ubuntu-latest
     steps:
-        # Checkout/build your application/install Node
-      - uses: actions/checkout@v3
+      - name: "Checkout Code"
+        uses: actions/checkout@v2
 
-      - name: Contrast SCA Action
-        uses: Contrast-Security-OSS/contrast-sca-action@v1
+      - name: "Run FOSSA Scan"
+        uses: fossas/fossa-action@v1
         with:
-          apiKey: ${{ secrets.CONTRAST_API_KEY }}
-          orgId: ${{ secrets.CONTRAST_ORGANIZATION_ID }}
-          authHeader: ${{ secrets.CONTRAST_AUTH_HEADER }}
-          apiUrl: ${{ secrets.CONTRAST_API_URL }}
-          filePath: package.json
-          severity: medium
-          fail: true
+          api-key: ${{secrets.fossaApiKey}}
+
+      - name: "Run FOSSA Test"
+        uses: fossas/fossa-action@v1
+        with:
+          api-key: ${{secrets.fossaApiKey}}
+          run-tests: true
