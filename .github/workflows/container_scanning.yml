@@ -37,6 +37,7 @@ jobs:
           tags: safidesafi/scrumboard:keycloak
       
       - name: Scan for vulnerabilities
+        continue-on-error: true
         id: scan_keycloak
         uses: crazy-max/ghaction-container-scan@v2
         with:
