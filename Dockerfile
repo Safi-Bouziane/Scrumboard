@@ -1,4 +1,4 @@
-FROM node:lts-bullseye-slim
+FROM FROM node:alpine
 
 RUN mkdir /usr/src/app 
 WORKDIR /usr/src/app
